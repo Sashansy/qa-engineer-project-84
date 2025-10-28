@@ -16,7 +16,11 @@
   status: pass
 
 - summary: |
-    Сброс фильтра при смене категории
+    Сброс категории
+  status: fail
+
+- summary: |
+    Сохранение фильтра при смене категории
   status: pass
 
 - summary: |
@@ -25,6 +29,10 @@
 
 - summary: |
     Буквы в поле "Price"
+  status: fail
+
+- summary: |
+    Граничные значения в "Price"
   status: fail
 
 - summary: |

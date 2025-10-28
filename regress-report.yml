@@ -5,8 +5,100 @@ test-cases:
     status: fail
 
   - summary: |
-      
-    status: 
+      Поиск товара по названию
+    status: fail
+
+  - summary: |
+      Поиск товара с частичным совпадением
+    status: pass
+
+  - summary: |
+      Поиск товара без совпадений
+    status: fail
+
+  - summary: |
+      Сброс категории
+    status: fail
+
+  - summary: |
+      Сохранение фильтра при смене категории
+    status: pass
+
+  - summary: |
+      Поиск товара в наличии
+    status: pass
+
+  - summary: |
+      Буквы в поле "Price"
+    status: fail
+
+  - summary: |
+      Граничные значения в "Price"
+    status: fail
+
+  - summary: |
+      Переход по навигации сохраняет фильтры/поиск
+    status: fail
+
+  - summary: |
+      Добавление товара в корзину с карточки товара
+    status: pass
+
+  - summary: |
+      Повторное добавление товара в корзину
+    status: pass
+
+  - summary: |
+      Оформление заказа с пустой корзиной
+    status: pass
+
+  - summary: |
+      Удаление всех товаров из корзины
+    status: pass
+
+  - summary: |
+      Продолжить покупки из корзины
+    status: pass
+
+  - summary: |
+      Корзина хранится в сессии и сохраняется при обновлении страницы
+    status: pass
+
+  - summary: |
+      Навигация между страницами без полной перезагрузки(SPA)
+    status: pass
+
+  - summary: |
+      Загрузка сайта без интернета
+    status: pass
+
+  - summary: |
+      Пользовательский сценарий при 3G интернете
+    status: pass
+
+  - summary: |
+      Адаптивность на разных разрешениях
+    status: pass
+
+  - summary: |
+      Трафик по HTTPS
+    status: pass
+
+  - summary: |
+      Защита от XSS
+    status: pass
+
+  - summary: |
+      Защита от SQL иньекций
+    status: pass
+
+  - summary: |
+      Высокая нагрузка: просмотр каталога
+    status: pass
+
+  - summary: |
+      Высокая нагрузка: просмотр товара
+    status: pass
 
 bugreports:
   - summary: |
@@ -62,3 +154,84 @@ bugreports:
       Отображаются все товары, удовлетворяющие фильтру, независимо от страницы, где они изначально находились
     actual-result: |
       Не происходит фильтрация ("Производитель" и "Цена" не работают)
+
+  - summary: |
+      Критическая ошибка 500 при попытке оформления заказа
+    environment: |
+      Google Chrome	141.0.7390.123 (Официальная сборка) (64 бит)
+      ОС Windows 10 10.0.19045
+    steps-to-reproduce: |
+      - Добавить товар в корзину
+      - Перейти в корзину
+      - Нажать кнопку "Оформить заказ"
+    expected-result: |
+      - Статус 200 с корректными данными
+      - Подтверждение заказа
+      - Переход на страницу оплаты
+    actual-result: |
+      - Модальное окно "Заказ успешно оформлен" с суммой и товарами
+      - Во вкалде Network ошибка 500
+      - Есть cURL, скриншот в error500.png
+
+  - summary: |
+      Поиск товара без совпадений
+    environment: |
+      Google Chrome	141.0.7390.123 (Официальная сборка) (64 бит)
+      ОС Windows 10 10.0.19045
+    steps-to-reproduce: |
+    - В поле "Search" ввести "fugesigfjesgk"
+    expected-result: |
+      Отображается сообщение "Nothing found!"
+    actual-result: |
+      При несовпадении выводятся все товары на страничке
+
+  - summary: |
+      Фильтр при пустой категории
+    environment: |
+      Google Chrome	141.0.7390.123 (Официальная сборка) (64 бит)
+      ОС Windows 10 10.0.19045
+    steps-to-reproduce: |
+    - Выбрать пустую категорию
+    - Выбрать чекбоксы
+    - Задать ценовой диапазон
+    expected-result: |
+      Показываются товары, удовлетворяющие фильтрам
+    actual-result: |
+      Выводятся все товары (фильтр не влияет)
+
+  - summary: |
+      Буквы в поле "Price"
+    environment: |
+      Google Chrome	141.0.7390.123 (Официальная сборка) (64 бит)
+      ОС Windows 10 10.0.19045
+    steps-to-reproduce: |
+      В фильтре "Price" ввести буквы
+    expected-result: |
+      Ввод не принемается
+    actual-result: |
+      Вводится английская буква "e"
+
+  - summary: |
+      Граничные значения в "Price"
+    environment: |
+      Google Chrome	141.0.7390.123 (Официальная сборка) (64 бит)
+      ОС Windows 10 10.0.19045
+    steps-to-reproduce: |
+      В фильтре "Price" ввести диапазон цен
+    expected-result: |
+      Отображаются товары попадающие в диапазон цен
+    actual-result: |
+      Значения для фильтрации берутся из цен без скидки(цена без скидки не засчитывается)
+
+  - summary: |
+      Отсутствие пагинации при фильтрах
+    environment: |
+      Google Chrome	141.0.7390.123 (Официальная сборка) (64 бит)
+      ОС Windows 10 10.0.19045
+    steps-to-reproduce: |
+      При каких либо фильтрах: Поиск, Категория, Брнед, В наличии, Цена
+    expected-result: |
+      Имеется кнопка "Next" и "Previous"
+    actual-result: |
+      Кнопка "Next" проподает
+
