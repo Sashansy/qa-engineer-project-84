@@ -1,0 +1,93 @@
+---
+- summary: |
+    Пользовательский сценарий
+  status: fail
+
+- summary: |
+    Поиск товара по названию
+  status: fail
+
+- summary: |
+    Поиск товара с частичным совпадением
+  status: pass
+
+- summary: |
+    Поиск товара без совпадений
+  status: pass
+
+- summary: |
+    Сброс фильтра при смене категории
+  status: pass
+
+- summary: |
+    Поиск товара в наличии
+  status: fail
+
+- summary: |
+    Буквы в поле "Price"
+  status: fail
+
+- summary: |
+    Переход по навигации сохраняет фильтры/поиск
+  status: pass
+
+- summary: |
+    Добавление товара в корзину с карточки товара
+  status: pass
+
+- summary: |
+    Повторное добавление товара в корзину
+  status: pass
+
+- summary: |
+    Оформление заказа с пустой корзиной
+  status: pass
+
+- summary: |
+    Удаление всех товаров из корзины
+  status: pass
+
+- summary: |
+    Продолжить покупки из корзины
+  status: pass
+
+- summary: |
+    Корзина хранится в сессии и сохраняется при обновлении страницы
+  status: pass
+
+- summary: |
+    Навигация между страницами без полной перезагрузки(SPA)
+  status: pass
+
+- summary: |
+    Загрузка сайта без интернета
+  status: pass
+
+- summary: |
+    Пользовательский сценарий при 3G интернете
+  status: pass 
+  # blocked
+
+- summary: |
+    Адаптивность на разных разрешениях
+  status: fail
+
+- summary: |
+    Трафик по HTTPS
+  status: pass
+
+- summary: |
+    Защита от XSS
+  status: pass
+
+- summary: |
+    Защита от SQL иньекций
+  status: pass
+
+- summary: |
+    Высокая нагрузка: просмотр каталога
+  status: pass
+
+- summary: |
+    Высокая нагрузка: просмотр товара
+  status: pass
